@@ -26,6 +26,7 @@ const App = () => {
   const [data, setData] = useState([]);
   const [updatedData, setUpdatedData] = useState([]);
   const [isSignedUp, setIsSignedUp] = useState(false);
+  const [goToApp, setGoToApp] = useState(false);
   const [date, setDate] = useState([
     {
       startDate: new Date(),
@@ -85,41 +86,54 @@ const App = () => {
   return (
     <>
       {isSignedUp ? (
-        <div>
-          <DateRangePicker
-            onChange={handleChange}
-            showSelectionPreview={true}
-            moveRangeOnFirstSelection={false}
-            months={2}
-            ranges={date}
-            direction='horizontal'
-          />
-          <br />
-          <br />
-          <div id='data2'>
-            {updatedData.map((x, index) => {
-              return (
-                <div key={index}>
-                  <h2>{x.division}</h2>
-                  <div className='events'>
-                    {x.events.map((i, index) => {
-                      return (
-                        <div className='event-item' key={index}>
-                          <p>Event Name: {i.title}</p>
-                          <p>Date: {i.date}</p>
-                          <p>Notes: {i.notes}</p>
-                          <p>Bunting: {`${i.bunting}`}</p>
-                        </div>
-                      );
-                    })}
-                  </div>
-                </div>
-              );
-            })}
-          </div>
-          <br />
-          <br />
-        </div>
+        <>
+          {!goToApp ? (
+            <div>
+              <p>Please Check your mail</p>
+              <button
+                onClick={() => setGoToApp(true)}
+                style={{ cursor: 'pointer' }}>
+                Go To App
+              </button>
+            </div>
+          ) : (
+            <div>
+              <DateRangePicker
+                onChange={handleChange}
+                showSelectionPreview={true}
+                moveRangeOnFirstSelection={false}
+                months={2}
+                ranges={date}
+                direction='horizontal'
+              />
+              <br />
+              <br />
+              <div id='data2'>
+                {updatedData.map((x, index) => {
+                  return (
+                    <div key={index}>
+                      <h2>{x.division}</h2>
+                      <div className='events'>
+                        {x.events.map((i, index) => {
+                          return (
+                            <div className='event-item' key={index}>
+                              <p>Event Name: {i.title}</p>
+                              <p>Date: {i.date}</p>
+                              <p>Notes: {i.notes}</p>
+                              <p>Bunting: {`${i.bunting}`}</p>
+                            </div>
+                          );
+                        })}
+                      </div>
+                    </div>
+                  );
+                })}
+              </div>
+              <br />
+              <br />
+            </div>
+          )}
+        </>
       ) : (
         <div id='form-body-container'>
           <div id='heading'>
