@@ -19,8 +19,8 @@ const start = async () => {
       res.sendFile(path.join(__dirname, 'client', 'build', 'index.html'));
     });
     app.listen(port, console.log(`server is listening on port ${port}...`));
-  } catch (err) {
-    console.log(err);
+  } catch (error) {
+    console.log(error);
   }
 };
 
